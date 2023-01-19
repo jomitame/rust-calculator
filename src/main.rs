@@ -21,7 +21,9 @@ fn do_operation (regx: Regex, mut expression: String, operation: &str) -> String
 
         let result = match operation {
             "+" => firts_number + second_number,
+            "-" => firts_number - second_number,
             "*" => firts_number * second_number,
+            "/" => firts_number / second_number,
             _ => 0,
         };
 
@@ -33,7 +35,9 @@ fn do_operation (regx: Regex, mut expression: String, operation: &str) -> String
 fn main() {
     // Regex
     let regex_for_add: Regex = Regex::new(r"(\d+)\s?\+\s?(\d+)").unwrap();
+    let regex_for_less = Regex::new(r"(\d+)\s?\-\s?(\d+)").unwrap();
     let regex_for_mult: Regex = Regex::new(r"(\d+)\s?\*\s?(\d+)").unwrap();
+    let regex_for_div = Regex::new(r"(\d+)\s?/\s?(\d+)").unwrap();
 
     // User Data
     println!("Please introduce your expresion: ");
@@ -42,9 +46,12 @@ fn main() {
 
     // Multiply
     result = do_operation(regex_for_mult, result, "*");
+    //Division
+    result = do_operation(regex_for_div, result, "/");
     // Sum
     result = do_operation(regex_for_add, result, "+");
-    
+    // Less
+    result = do_operation(regex_for_less, result, "-");
 
     // Results
     println!("Result: {}", result);
